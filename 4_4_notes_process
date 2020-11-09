@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "-----------------------------------------------------------"
+echo "On va afficher l'ID du process relatif à notre bash "
+echo $$
+echo "-----------------------------------------------------------"
+echo "On va afficher l'ID du parent du process relatif à notre bash"
+echo $PPID
+echo "-----------------------------------------------------------"
+echo "On va afficher le process qui est en train de s'exécuter " # qui est ce script dans ce cas et le bash si in tape la commande dans le terminal 
+echo $0 
+echo "-----------------------------------------------------------"
+# the command ps is used to list running processes for the current shell with their Process id PID
+echo "Output of ps"
+ps
+echo "-----------------------------------------------------------"
+echo "output of ps -ef "
+ps -ef
+# ps -ef shows us every process running in the system
+echo "-----------------------------------------------------------"
+echo "executing ls /dev/pts"
+# cette commande affiche la liste des terminal ouverts avec des numéros ( si ona deux terminaux on va touver 0 et )
+# si on est dans le terminal 0 et on veut afficher qulque chose dans le terminal 1 on fait : echo "BOnjour ">>/dev/pts/1
+ls /dev/pts

@@ -1,0 +1,3 @@
+#!/bin/bash
+# ce script permet d'afficher les processus relatifs à un user  
+ps -ef | grep "^"$1 | awk '{printf("%s\t%d\t%s\n",$1,$2,$8);}'

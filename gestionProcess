@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "-------------------------------------------"
+echo "Gestion des processus"
+echo "-------------------------------------------"
+echo "1- Lister tous les process"
+echo "2- Lister les process d'un utilisateur"
+echo "9- Qutter"
+read choix
+case $choix in
+1) ps -ef
+	;;
+2)
+echo "Donner le nom du user"
+read user  
+ps -ef | grep "^"$user | awk '{printf("%s\t%d\t%s\n",$1,$2,$8);}'
+;;
+9) exit 
+esac

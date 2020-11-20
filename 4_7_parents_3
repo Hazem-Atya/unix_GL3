@@ -1,0 +1,6 @@
+p=$$
+while (($p))
+do
+p=`ps -o ppid= -p $p`
+echo $p
+done

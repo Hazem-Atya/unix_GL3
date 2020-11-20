@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Je suis le processus $0 de pid $$ et je suis le fils de $PPID "
+echo "Voici la liste de mes parents "
+
+ps -ef | awk '{ printf("%d\t%d\t%s\n",$2,$3,$8) ; }' >f1
+p=$PPID
+while ((p))
+do
+while read pid ppid nom
+do
+
+if((p==pid))
+then
+echo "$pid  $ppid  $nom" 
+p=$ppid
+fi
+done < f1 
+done 

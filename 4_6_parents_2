@@ -1,0 +1,12 @@
+#!/bin/bash
+a=$$
+while [ $a -gt 0 ]
+do
+
+
+ps -ef | egrep "^[^ ]* +$a +[^ ]* +.*" | tr -s ' ' | cut -d' ' -f3
+a=`ps -ef | egrep "^[^ ]* +$a +[^ ]* +.*" | tr -s ' ' | cut -d' ' -f3`
+done
+
+
+

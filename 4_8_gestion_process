@@ -1,0 +1,64 @@
+#!/bin/bash
+echo "1- Lister tous les process"
+echo "2- Lister le père"
+echo "3- Lister les parents "
+echo "4- Lister les fils directs"
+echo "5- Lister les process d'un utilisateur"
+echo "6- Tuer les process d'un utilisateur"
+echo "7- Tuer un process particulier"
+echo "8- Suspendre un process"
+echo "9- Reprendre un process"
+echo "10- Quitter"
+read choix
+
+case $choix in
+1) ps -ef | tr -s " " | cut -d " " -f1,2,3,8
+   ;;
+2) echo "Je suis le process $$ et mon père est $PPID"
+   ;;
+3) 
+	ps -ef | awk '{ printf("%d\t%d\t%s\n",$2,$3,$8) ; }' >f1
+	p=$PPID
+	while ((p))
+	do
+	   while read pid ppid nom
+	   do
+
+	     if((p==pid))
+	     then
+	       echo "$pid  $ppid  $nom" 
+	       p=$ppid
+	     fi
+	   done < f1 
+	done 
+    ;;
+4) ps -ef | tr -s " " | cut -d " " -f2,3,8 | grep ".* $$" 
+    ;;
+5) echo "Donner le nom de l'utilisateur"
+   read user
+   ps -ef | tr -s " " | cut -d " " -f1,2,3,8 | grep "^"$user
+    ;;
+6) echo "Donner le nom de l'utilisateur pour tuer ces process "
+   read user
+   ps -ef | tr -s " " | cut -d " " -f1,8 | grep $user | cut -d " " -f2 >f1
+   while read p
+   do 
+   killall $p
+   done <f1
+    ;;
+7) echo "Donner le nom du process à tuer "
+   read process
+   killall $process 
+   ;;
+8) echo "Donner le nom du process à suspendre"
+   read nom
+   pid=`ps -ef | tr -s " " | cut -d " " -f2,8 | grep $nom | cut -d " " -f1`
+   kill -STOP $pid
+    ;;
+9) echo "Donner le nom du process à reprendre"
+   read nom
+   pid=`ps -ef | tr -s " " | cut -d " " -f2,8 | grep $nom | cut -d " " -f1`
+   kill -CONT $pid
+   ;;
+10) exit
+esac 

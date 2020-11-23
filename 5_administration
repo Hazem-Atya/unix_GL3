@@ -9,8 +9,8 @@ echo "4- Gestion des process"
 echo "99- Quitter"
 echo "-----------------------------------------------------"
 read c 
-case c in 
-
+echo c
+case $c in 
 1) echo "-----------------------------------------------------"
    echo "Modules"
    echo "11- Lister les modules" 
@@ -19,7 +19,7 @@ case c in
    echo "14- Revenir au menu précédant"
    echo "99- Quitter"
    read c1
-   case c1 in 
+   case $c1 in 
    11) lsmod 
 	;;
    12) echo "Donner le nom du module à supprimer "
@@ -35,7 +35,7 @@ case c in
    99) exit
         ;;
    esac
-      
+   5_administration   
   ;;
 2) echo "-----------------------------------------------------"
    echo "Runlevels "
@@ -47,7 +47,7 @@ case c in
    echo "26- Revenir au menu précédant "
    echo "99- Quitter"
    read c2 
-   case c2 in 
+   case $c2 in 
    21) init 0
        ;;
    22) who -r 
@@ -62,14 +62,14 @@ case c in
 	echo "2- bluetooth"        
         echo "3- keyboard "
         read choix 
-        case choix in 
+        case $choix in 
         1) echo "-----------------------------------------------------"
 	   echo "Merci de choisir "
            echo "1- Pour activer le service networking"
            echo "2- Pour stopper le service networking"
            echo "99- Quitter"
            read x
-           case x in 
+           case $x in 
            1) /etc/init.d/networking start
 		;;
            2) /etc/init.d/networking stop
@@ -84,7 +84,7 @@ case c in
            echo "2- Pour stopper le service bluetooth"
            echo "99- Quitter"
            read x
-           case x in 
+           case $x in 
            1) /etc/init.d/bluetooth start
 		;;
            2) /etc/init.d/bluetooth stop
@@ -99,20 +99,25 @@ case c in
            echo "2- Pour stopper le service keyboard"
            echo "99- Quitter"
            read x
-           case x in 
-           1) /etc/init.d/keyboard-setup.sh start
+           case $x in 
+           1)  echo "activation "
+             /etc/init.d/keyboard-setup.sh start
 		;;
-           2) /etc/init.d/keyboard-setup.sh stop
+           2) echo "stopping "
+                /etc/init.d/keyboard-setup.sh stop
 		;;
            99) exit 
 		;;
 	   esac 
+        ;;
+      esac 
        ;;
    26) 5_administration 
 	;;
    99) exit 
     ;;
    esac
+   5_administration   
   ;;
 3) echo "-----------------------------------------------------"
    echo "Comptes et groupes"
@@ -122,7 +127,7 @@ case c in
    echo "34- Revenir au menu précédant"
    echo "99- Quitter"
    read c3 
-   case c3 in 
+   case $c3 in 
    31) cat /etc/passwd
       ;;
    32) cat /etc/group
@@ -136,6 +141,7 @@ case c in
    99) exit 
 	;;
    esac
+  5_administration
 ;;
 4) echo "-----------------------------------------------------"
    echo "Gestion des process"
@@ -146,7 +152,7 @@ case c in
    echo "45- Revenir au menu précédant"
    echo "99- Quitter"
    read c4
-   case c4 in 
+   case $c4 in 
    41) ps -ef 
 	;;
    42) echo "Donner le nom du process à tuer "
@@ -166,6 +172,8 @@ case c in
    45) 5_administration
 	;;
    99) exit 
+       ;;
+   esac
+   5_administration
 ;;
-
-
+esac

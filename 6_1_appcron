@@ -1,0 +1,2 @@
+echo "Application appcron on $(date +%D) et $(date +%T)" >> /tmp/appcron.log
+ 

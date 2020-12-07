@@ -1,0 +1,7 @@
+x=$(df -k | grep /sda1 | tr -s " "  | cut -d  " " -f5 |cut -d "%" -f1 ) 
+if ((x>80))
+then
+echo "Usage depassed 80% $(date +%D) et $(date +%T)">>/tmp/usage.log
+else
+echo "Usage is under 80% $(date +%D) et $(date +%T)" >>/tmp/usage.log 
+fi

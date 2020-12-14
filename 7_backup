@@ -1,0 +1,54 @@
+#!/bin/bash
+# tar -tvf path  : pour afficher le contenu d'un tar 
+
+echo "Sauvegarde & restauration"
+echo "------------------------------------------"
+echo "1- tar"
+echo "2- dump & restore"
+echo "3- cpio"
+echo "4- dd"
+echo "99- quitter"
+
+read choix
+
+case $choix in
+1) 
+   echo "11- sauvegarde avec tar"
+   echo "12- restauration avec tar"
+   echo "19 revenir au menu précédent"
+   echo "99- Quitter"
+   read c1;
+   case $c1 in 
+   11) echo "Donner le répertoire à sauvegarder";
+      read rep;
+     echo "Donner le nom du fichier de sauvegarde"
+      read nom;
+      tar -cvf /tmp/$nom   $rep
+      ;;
+   12) echo "Donner le dossier à récupérer"
+       read nom
+       echo "1- Récupérer tout le dossier ";
+       echo "2- Récupérer un fichier ";
+       read cc;
+       case $cc in 
+       1) cd /
+          tar -xvf /tmp/$nom  
+         ;;
+       2) cd /
+          echo "Donner ne nom du fichier à récupérer"
+          # tar -tvf /tmp/$nom  , cette commande permet d'afficher les fichiers dans le tar
+          read fichier
+          tar -xf /tmp/$nom $fichier   
+        ;;
+      esac
+     ;;
+   19) 7_backup
+     ;;
+   99) exit
+     ;;
+   esac  
+   ;;
+99)
+   exit
+   ;;
+esac
